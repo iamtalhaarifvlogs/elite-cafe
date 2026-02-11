@@ -1,7 +1,6 @@
+// app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -19,8 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {/* Header is a client component with "use client" */}
         <Header />
-        <main>{children}</main>
+
+        {/* Ensure main content has top padding so it's not hidden under fixed header */}
+        <main style={{ paddingTop: "70px" }}>{children}</main>
+
+        {/* Footer */}
         <Footer />
       </body>
     </html>
