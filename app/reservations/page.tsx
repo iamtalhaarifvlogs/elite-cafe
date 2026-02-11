@@ -6,32 +6,29 @@ export default function Reservations() {
 
   async function handleSubmit(e: any) {
     e.preventDefault();
-    const form = new FormData(e.target);
-
-    await fetch("/api/reservation", {
-      method: "POST",
-      body: JSON.stringify({
-        name: form.get("name"),
-        email: form.get("email"),
-        date: form.get("date"),
-        guests: form.get("guests"),
-      }),
-    });
-
-    setStatus("Reservation submitted!");
+    setStatus("Reservation request received.");
   }
 
   return (
-    <section>
-      <h1>Reserve a Table</h1>
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" required />
-        <input name="email" placeholder="Email" required />
-        <input name="date" type="date" required />
-        <input name="guests" type="number" placeholder="Guests" required />
-        <button type="submit">Reserve</button>
-      </form>
-      <p>{status}</p>
-    </section>
+    <>
+      <section className="hero">
+        <div className="container hero-content">
+          <h1>Reserve Your Experience</h1>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <form className="card">
+            <input placeholder="Name" required />
+            <input placeholder="Email" required />
+            <input type="date" required />
+            <input type="number" placeholder="Guests" required />
+            <button className="btn-primary">Reserve</button>
+          </form>
+          <p>{status}</p>
+        </div>
+      </section>
+    </>
   );
 }

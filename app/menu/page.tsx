@@ -1,17 +1,29 @@
 export default function Menu() {
   return (
-    <section>
-      <h1>Our Menu</h1>
+    <>
+      <section className="hero">
+        <div className="container hero-content">
+          <h1>Our Curated Menu</h1>
+          <p>Premium ingredients. Elevated presentation.</p>
+        </div>
+      </section>
 
-      <h2>Coffee</h2>
-      <p>Espresso — $6</p>
-      <p>Latte — $8</p>
-      <p>Cappuccino — $8</p>
-
-      <h2>Pastries</h2>
-      <p>Croissant — $7</p>
-      <p>Almond Tart — $9</p>
-      <p>Chocolate Cake — $10</p>
-    </section>
+      <section className="section">
+        <div className="container grid-3">
+          <div className="card">
+            <h3>Signature Latte</h3>
+            <p>$8</p>
+          </div>
+          <div className="card">
+            <h3>Luxury Cappuccino</h3>
+            <p>$9</p>
+          </div>
+          <div className="card">
+            <h3>Artisan Croissant</h3>
+            <p>$7</p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

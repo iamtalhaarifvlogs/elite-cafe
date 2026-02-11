@@ -1,24 +1,61 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
-      <section>
-        <h1>Luxury Coffee Experience in Los Angeles</h1>
-        <p>
-          Discover artisan coffee, curated pastries, and a refined atmosphere
-          at Elite Cafe.
-        </p>
+      {/* HERO */}
+      <section className="hero">
+        <div className="container hero-content">
+          <h1>
+            A New Standard of Luxury Coffee in Los Angeles
+          </h1>
+          <p>
+            Elite Cafe delivers artisan craftsmanship,
+            curated pastries, and an atmosphere designed for
+            the modern lifestyle.
+          </p>
+          <Link href="/reservations" className="btn-primary">
+            Reserve Your Table
+          </Link>
+        </div>
       </section>
 
-      <section>
-        <h2>Our Signature Experience</h2>
-        <p>
-          Hand-selected beans. Master baristas. Premium ambiance.
-        </p>
+      {/* SIGNATURE */}
+      <section className="section">
+        <div className="container">
+          <h2>Signature Experience</h2>
+          <div className="grid-3">
+            <div className="card">
+              <h3>Artisan Coffee</h3>
+              <p>
+                Hand-selected beans roasted to perfection.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Curated Pastries</h3>
+              <p>
+                Freshly crafted luxury desserts daily.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Refined Atmosphere</h3>
+              <p>
+                Designed for conversations, creativity,
+                and elegance.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section>
-        <h2>Visit Us Today</h2>
-        <p>Located in the heart of Los Angeles.</p>
+      {/* CTA */}
+      <section className="section section-dark">
+        <div className="container">
+          <h2>Experience Elite Cafe Today</h2>
+          <Link href="/order" className="btn-primary">
+            Order Online
+          </Link>
+        </div>
       </section>
     </>
   );
