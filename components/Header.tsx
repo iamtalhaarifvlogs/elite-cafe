@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Header() {
@@ -17,7 +17,7 @@ export default function Header() {
     { href: "/contact", label: "Contact" },
   ];
 
-  // Close navbar on route change
+  // Close mobile menu on route change
   useEffect(() => {
     const navCollapse = document.getElementById("navbarSupportedContent");
     if (navCollapse) {
@@ -34,7 +34,7 @@ export default function Header() {
             Elite Cafe
           </Link>
 
-          {/* Hamburger toggle */}
+          {/* Hamburger Toggle */}
           <button
             className="navbar-toggler"
             type="button"
@@ -47,7 +47,7 @@ export default function Header() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Navbar links */}
+          {/* Navbar Links */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-md-0">
               {links.map((link) => (
