@@ -6,26 +6,32 @@ import Link from "next/link";
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  return (
-    <header className="w-full bg-black text-white fixed top-0 left-0 z-50 shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
-        {/* Logo */}
-        <div className="text-2xl font-bold tracking-wide">
-          Elite Cafe
-        </div>
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/menu", label: "Menu" },
+    { href: "/reservations", label: "Reservations" },
+    { href: "/order", label: "Order Online" },
+    { href: "/about", label: "About" },
+    { href: "/blog", label: "Blog" },
+    { href: "/contact", label: "Contact" },
+  ];
 
-        {/* Desktop Navigation */}
+  return (
+    <header className="fixed top-0 left-0 w-full bg-black text-white z-50 shadow-md">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+        {/* Logo */}
+        <div className="text-2xl font-bold tracking-wide">Elite Cafe</div>
+
+        {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 text-lg">
-          <Link href="/">Home</Link>
-          <Link href="/menu">Menu</Link>
-          <Link href="/reservations">Reservations</Link>
-          <Link href="/order">Order Online</Link>
-          <Link href="/about">About</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/contact">Contact</Link>
+          {links.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Hamburger Menu */}
+        {/* Hamburger */}
         <button
           className="md:hidden flex flex-col justify-center items-center gap-1 p-2"
           onClick={() => setOpen(!open)}
@@ -51,17 +57,15 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-black text-white flex flex-col space-y-4 px-4 pb-4 transition-all duration-300 ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        className={`md:hidden bg-black text-white flex flex-col space-y-4 px-4 pb-4 transition-all duration-300 overflow-hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <Link href="/" onClick={() => setOpen(false)}>Home</Link>
-        <Link href="/menu" onClick={() => setOpen(false)}>Menu</Link>
-        <Link href="/reservations" onClick={() => setOpen(false)}>Reservations</Link>
-        <Link href="/order" onClick={() => setOpen(false)}>Order Online</Link>
-        <Link href="/about" onClick={() => setOpen(false)}>About</Link>
-        <Link href="/blog" onClick={() => setOpen(false)}>Blog</Link>
-        <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
+        {links.map((link) => (
+          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            {link.label}
+          </Link>
+        ))}
       </div>
     </header>
   );
