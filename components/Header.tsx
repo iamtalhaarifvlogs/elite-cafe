@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   const links = [
     { href: "/", label: "Home" },
@@ -16,44 +17,55 @@ export default function Header() {
     { href: "/contact", label: "Contact" },
   ];
 
+  // Close navbar on route change
+  useEffect(() => {
+    const navCollapse = document.getElementById("navbarSupportedContent");
+    if (navCollapse) {
+      navCollapse.classList.remove("show");
+    }
+  }, [pathname]);
+
   return (
-    <header className="fixed top-0 left-0 w-full bg-black text-white z-50 shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
-        <div className="text-2xl font-bold">Elite Cafe</div>
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex space-x-6">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-yellow-400">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle Menu"
-        >
-          <span className={`block w-6 h-0.5 bg-white ${open ? "rotate-45 translate-y-1.5" : ""}`}></span>
-          <span className={`block w-6 h-0.5 bg-white ${open ? "opacity-0" : ""}`}></span>
-          <span className={`block w-6 h-0.5 bg-white ${open ? "-rotate-45 -translate-y-1.5" : ""}`}></span>
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden bg-black text-white overflow-hidden transition-all duration-300 ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        } flex flex-col space-y-4 px-4 pb-4`}
-      >
-        {links.map((link) => (
-          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
-            {link.label}
+    <header>
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow">
+        <div className="container">
+          {/* Logo */}
+          <Link href="/" className="navbar-brand">
+            Elite Cafe
           </Link>
-        ))}
-      </div>
+
+          {/* Hamburger toggle */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          {/* Navbar links */}
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto mb-2 mb-md-0">
+              {links.map((link) => (
+                <li className="nav-item" key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`nav-link ${
+                      pathname === link.href ? "active text-warning" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }
